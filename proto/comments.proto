@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package comments;
+
+service Comments {
+    rpc GetAllForVideoId(Request) returns (Response) {}
+    rpc GetSingle(SingleRequest) returns (Comment) {}
+    rpc Write(WriteRequest) returns (Comment) {}
+}
+
+message Comment {
+    string id = 1;
+    string video_id = 2;
+    string date_posted = 3;
+    string user = 4;
+    string content = 5;
+    uint64 likes = 6;
+    uint64 dislikes = 7;
+}
+
+message Request {
+    string video_id = 1;
+}
+
+message Response {
+    repeated Comment comments = 1;
+}
+
+message SingleRequest {
+    string comment_id = 1;
+}
+
+message WriteRequest {
+    string video_id = 1;
+    string user = 2;
+    string content = 3;
+}
+
